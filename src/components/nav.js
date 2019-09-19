@@ -37,7 +37,7 @@ const Nav = () => {
                         </Link>
                         </Grid>
                         <Grid item xs={2}>
-                        <Link to="/about">
+                        <Link to="/report">
                             <HelpOutlinedIcon className="nav_icon fab" />
                         </Link>
                         </Grid>
