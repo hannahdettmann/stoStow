@@ -13,6 +13,7 @@ function Report() {
  
   return (
     <div className="Add">
+      <Nav />
       <header className="App-header">
       <p className="header-close">report an issue or request a feature</p>
 
