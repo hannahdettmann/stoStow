@@ -2,6 +2,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import '../css/App.css';
+import Nav from './nav';
 
 function notify(){
   console.log("button clicked!")
