@@ -13,7 +13,7 @@ function notify(){
 function Report() {
  
   return (
-    <div className="Add">
+    <div className="App">
       <Nav />
       <header className="App-header">
       <p className="header-close">report an issue or request a feature</p>
