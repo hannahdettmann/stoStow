@@ -45,3 +45,14 @@
     transform: rotate(360deg);
   }
 }
+
+.nav_icon {
+  transform: scale(2);
+  color: #282c34;
+}
+
+nav {
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
