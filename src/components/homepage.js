@@ -51,7 +51,7 @@ function Homepage() {
         </Grid>
 
         <Grid item xs={4}>
-            <Link to="/about">
+            <Link to="/report">
         <IconButton aria-label="add" color="secondary">
           <HelpOutlinedIcon className="med_icon" />
         </IconButton>

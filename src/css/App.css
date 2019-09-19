@@ -17,6 +17,28 @@
   color: #DD7E6A
 }
 
+#pink-button{
+  background-color: #DD7E6A;
+  width: 300px;
+
+}
+
+.full-form{
+  background-color: whitesmoke;
+  padding: 25px;
+  border-radius: 5%
+}
+
+.outlined-input{
+  background-color: whitesmoke;
+  margin: 15px;
+  width: 300px;
+}
+
+.header-close{
+  margin-top: 5px;
+}
+
 .fab{
   filter: invert(0%);
   background-color: transparent;
