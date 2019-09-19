@@ -12,7 +12,6 @@ import Nav from './nav';
 function Homepage() {
   return (
     <div className="App">
-      <Nav />
       <header className="App-header">
       <Grid container spacing={3}>
       <Grid item xs={12}>
