@@ -67,3 +67,12 @@
     transform: rotate(360deg);
   }
 }
+
+.nav_icon {
+  transform: scale(2);
+  color: #282c34;
+}
+
+.nav {
+  background-color: #DD7E6A;
+}
