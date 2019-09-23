@@ -1,61 +1,110 @@
-import React from 'react';
+import React,{Component} from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import '../css/App.css';
 import Nav from './nav';
+import axios from 'axios';
+export default class Report extends Component{
 
-function notify(){
-  console.log("button clicked!")
+  constructor(props){ 
+    super(props);
 
-}
+    this.onChangeName = this.onChangeName.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
 
+    this.state = {
+      name: '',
+      email: '',
+      description: ''
+    }
+  }
 
-function Report() {
+    notify(){
+      console.log("button clicked!");
+    }
+    onChangeName(e){
+      this.setState({
+        name: e.target.value
+      });
+    }
+    onChangeEmail(e){
+      this.setState({
+        email: e.target.value
+      });
+    }
+    onChangeDescription(e){
+      this.setState({
+        description: e.target.value
+      });
+    }
+    onSubmit(e){
+      e.preventDefault();
+
+      const report = {
+        name: this.state.name,
+        email: this.state.email,
+        description: this.state.description
+      }
+      console.log(report);
+      axios.post('http://localhost:5000/api/add-report', {report})
+        .then(res=>console.log(res.data))
+        .catch(err =>{
+          console.log("didnt generate report");
+        });
+      window.location = '/report';
+    }
+    render() {
  
-  return (
-    <div className="App">
-      <Nav />
-      <header className="App-header">
-      <p className="header-close">report an issue or request a feature</p>
-
-      <form className="full-form">
-      <TextField
-        id="outlined-input"
-        className="outlined-input"
-        label="Name"
-        //value={values.name}
-        margin="normal"
-        variant="outlined"
-      />
-      <br/>
-      <TextField
-        id="outlined-input"
-        className="outlined-input"
-        label="Email"
-        //value={values.name}
-        margin="normal"
-        variant="outlined"
-      />
-      <br/>
-      <TextField
-        id="outlined-multiline-flexible"
-        multiline
-        rows="8"
-        className="outlined-input"
-        label="Message"
-        //value={values.name}
-        margin="normal"
-        variant="outlined"
-      />
-      <br/>
-      <Button id="pink-button" variant="contained" onClick={notify()}>
-        SUBMIT
-      </Button>
-      </form>
-
-      </header>
-    </div>
-  );
+      return (
+        <div className="App">
+          <Nav />
+          <header className="App-header">
+          <p className="header-close">report an issue or request a feature</p>
+    
+          <form action="/api/add=report" method="POST" onSubmit={this.onSubmit} className="full-form">
+          <TextField
+            id="outlined-input"
+            className="outlined-input"
+            label="Name"
+            value = {this.state.name}
+            onChange={this.onChangeName}
+            margin="normal"
+            variant="outlined"
+          />
+          <br/>
+          <TextField
+            id="outlined-input"
+            className="outlined-input"
+            label="Email"
+            value = {this.state.email}
+            onChange={this.onChangeEmail}
+            margin="normal"
+            variant="outlined"
+          />
+          <br/>
+          <TextField
+            id="outlined-multiline-flexible"
+            multiline
+            rows="8"
+            className="outlined-input"
+            label="Message"
+            value = {this.state.description}
+            onChange={this.onChangeDescription}
+            //value={values.name}
+            margin="normal"
+            variant="outlined"
+          />
+          <br/>
+          <div className="form-group">
+          <input type="submit" id="pink-button" variant="contained" className="btn btn-primary"></input>
+          </div>      
+          </form>
+    
+          </header>
+        </div>
+      );
+    } 
 }
 
-export default Report;
