@@ -5,26 +5,25 @@ import StorageIcon from '@material-ui/icons/Storage';
 import SearchIcon from '@material-ui/icons/Search';
 import AddCircleOutlinedIcon from '@material-ui/icons/AddCircleOutlined';
 import HelpOutlinedIcon from '@material-ui/icons/HelpOutlined';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import '../css/App.css';
-import Nav from './nav';
 
 function Homepage() {
   return (
     <div className="App">
       <header className="App-header">
-      <Grid container spacing={3}>
+      <Grid container spacing={0}>
       <Grid item xs={12}>
         <h2>
             StoStorage
-        </h2>
+          </h2>
           <br />
         </Grid>
-        
+
         <Grid item xs={12}>
         <StorageIcon className="big_icon"/>
         </Grid>
-        
+
         <Grid item xs={12}>
         <br />
         <p>
@@ -52,14 +51,13 @@ function Homepage() {
         </Grid>
 
         <Grid item xs={4}>
-            <Link to="/report">
+            <Link to="/about">
         <IconButton aria-label="add" color="secondary">
           <HelpOutlinedIcon className="med_icon" />
         </IconButton>
         </Link>
           <p>what is this</p> 
         </Grid>
-
         </Grid>
       </header>
     </div>
