@@ -1,10 +1,7 @@
 import React from 'react';
 import { 
     AppBar, 
-    Toolbar,
-    List, 
-    ListItem,
-    ListItemIcon
+    Toolbar
 } from '@material-ui/core'
 import HelpOutlinedIcon from '@material-ui/icons/HelpOutlined';
 import SearchIcon from '@material-ui/icons/Search';
