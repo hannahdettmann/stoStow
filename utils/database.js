@@ -5,7 +5,7 @@ let _db;
 
 const mongoConnect = (callback) => {
 MongoClient.connect(
-    'mongodb+srv://carlso16:kDwc59mSbr8ht93d@cluster0-7zbn4.mongodb.net/STOrage?retryWrites=true&w=majority',
+    "pls enter in uri string given in db",
     
 )
   .then(client => {
