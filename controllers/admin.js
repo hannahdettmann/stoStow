@@ -8,9 +8,10 @@ exports.postSendReport = (req,res, next) =>{
     const report = new Report(name,email,message);
     report.save()
     .then(result => {
-        console.log('Created Product');
+        console.log(result);
     })
     .catch(err => {
         console.log(err);
+        throw err;
     });
 };

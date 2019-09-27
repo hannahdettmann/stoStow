@@ -2,12 +2,13 @@ const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 
 let _db;
-
+const uri =   "mongodb://localhost:27017/launch";
 const mongoConnect = (callback) => {
 MongoClient.connect(
-    "pls enter in uri string given in db",
-    
-)
+  uri,
+  { useUnifiedTopology: true },
+  { useNewUrlParser: true }
+  )
   .then(client => {
     console.log('Connected!');
     _db = client.db();
