@@ -48,9 +48,15 @@ export default class Report extends Component{
         description: this.state.description
       }
       console.log(report);
-      axios.post('http://localhost:5000/api/add-report', {report})
-        .then(res=>console.log(res.data))
-        .catch(err =>{
+      fetch('http://localhost:27017/api/add-report', {
+        method: 'POST',
+        body: JSON.stringify(report),
+        headers: {
+          'Content-Type': 'application/json'
+      }
+      }).then(res=>{
+        return res.json();
+      }).catch(err =>{
           console.log("didnt generate report");
         });
       window.location = '/report';

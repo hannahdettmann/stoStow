@@ -2,7 +2,7 @@
   "name": "sto-stow",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost:27017",
   "dependencies": {
     "@material-ui/core": "^4.4.2",
     "@material-ui/icons": "^4.4.1",
@@ -10,6 +10,7 @@
     "body-parser": "^1.19.0",
     "concurrently": "^4.1.2",
     "mongodb": "^3.3.2",
+    "mongoose": "^5.7.1",
     "nodemon": "^1.19.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
