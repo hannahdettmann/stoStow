@@ -9,11 +9,87 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+export default class Item extends Component{
+  constructor(props){
+    super(props);
+    this.onChangeName = this.onChangeName.bind(this);
+    this.onChangeCount = this.onChangeCount.bind(this);
+    this.onChangeCategory = this.onChangeCategory.bind(this);
+    this.onChangeAisle = this.onChangeAisle.bind(this);
+    this.onChangeShelf = this.onChangeShelf.bind(this);
 
+    this.state = {
+      name:'',
+      count:'',
+      category:[],
+      aisle:'',
+      shelf:'',
+      isChecked: false
+    }
 
+  }
+  onChangeName(e){
+    this.setState({
+      name: e.target.value
+    });
+  }
+  onChangeCategory(e){
+    const category = this.state.category;
+    let index;
 
-function Add() {
-      const catgs = {
+    if(e.target.checked){
+      category.push(+e.target.value);
+    }
+    else{
+      index = category.indexOf(+e.target.value);
+      category.splice(index,1);
+    }
+    this.setState({
+      category: category
+    });
+  }
+  onChangeCount(e){
+    this.setState({
+      count: e.target.value
+    });
+  }
+  onChangeAisle(e){
+    this.setState({
+      aisle: e.target.value
+    });
+  }
+  onChangeShelf(e){
+    this.setState({
+      name: e.target.value
+    });
+  }
+  onClick(e){
+    e.preventDefault();
+    const item = {
+      name:this.state.name,
+      count:this.state.count,
+      category:this.state.category,
+      aisle:this.state.aisle,
+      shelf:this.state.shelf,
+      isChecked:this.state.isChecked
+    }
+    fetch('http://localhost:27017/api/add-item', {
+        method: 'POST',
+        body: JSON.stringify(item),
+        headers: {
+          'Content-Type': 'application/json'
+      }
+      }).then(res=>{
+        return res.json();
+      }).catch(err =>{
+          console.log("didnt generate report");
+          throw err;
+        });
+    window.location = '/add';
+  }
+  
+
+  catgs = {
         consumables: {
           isChecked: false,
           description: 'consumables'
@@ -75,7 +151,7 @@ function Add() {
           description: 'seasonal decor'
         },
       };
-
+  render(){
   return (
     <div className="App">
       <Nav />
@@ -91,7 +167,8 @@ function Add() {
           id="outlined-input"
           className="outlined-input"
           label="Item Name / Description"
-          //value={values.name}
+          value={this.state.name}
+          onChange = {this.onChangeName}
           margin="normal"
           variant="outlined"
         />
@@ -115,7 +192,7 @@ function Add() {
             <Checkbox
               checked={c.isChecked}
               className="check"
-              //onChange={handleChange('checkedB')}
+              onChange={this.onChangeCategory(c)}
               value={c}
             />
         }
@@ -145,7 +222,7 @@ function Add() {
         <Grid item xs={12} className="loc">
         <InputLabel htmlFor="age-simple">Shelf</InputLabel>
         <Select
-          //value={values.age}
+          value={values.age}
           //onChange={handleChange}
         >
           <MenuItem value={1}>1</MenuItem>
@@ -169,5 +246,7 @@ function Add() {
     </div>
   );
 }
+}
 
-export default Add;
+
+
