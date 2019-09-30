@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Component} from 'react';
 import Nav from './nav';
 import '../css/App.css';
 import { Grid } from '@material-ui/core';
@@ -34,14 +34,17 @@ export default class Item extends Component{
     });
   }
   onChangeCategory(e){
+    this.setState({
+      isChecked: !this.state.isChecked
+    });
     const category = this.state.category;
     let index;
 
-    if(e.target.checked){
-      category.push(+e.target.value);
+    if(this.state.isChecked){
+      category.push(e.target.value);
     }
     else{
-      index = category.indexOf(+e.target.value);
+      index = category.indexOf(e.target.value);
       category.splice(index,1);
     }
     this.setState({
@@ -178,25 +181,26 @@ export default class Item extends Component{
           id="outlined-input"
           className="outlined-input"
           label="Count"
-          //value={values.name}
+          value={this.state.count}
+          onChange = {this.onChangeCount}
           margin="normal"
           variant="outlined"
         />
       <Grid item xs={12}>
       <p className="form-check">Categories</p>
-        {Object.keys(catgs).map((c) => (
+        {Object.keys(this.catgs).map((c) => (
           <div className="form-check">
              <FormControlLabel
           control={
             
             <Checkbox
-              checked={c.isChecked}
+              checked={this.state.isChecked}
               className="check"
               onChange={this.onChangeCategory(c)}
               value={c}
             />
         }
-        label={catgs[c].description}
+        label={this.catgs[c].description}
       />  
         </div>
         ))};
@@ -222,7 +226,7 @@ export default class Item extends Component{
         <Grid item xs={12} className="loc">
         <InputLabel htmlFor="age-simple">Shelf</InputLabel>
         <Select
-          value={values.age}
+          //value={values.age}
           //onChange={handleChange}
         >
           <MenuItem value={1}>1</MenuItem>
