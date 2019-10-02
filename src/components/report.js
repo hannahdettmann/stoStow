@@ -69,7 +69,7 @@ export default class Report extends Component{
           <header className="App-header">
           <p className="header-close">report an issue or request a feature</p>
     
-          <form action="/api/add=report" method="POST" onSubmit={this.onSubmit} className="full-form">
+          <form action="/api/add-report" method="POST" onSubmit={this.onSubmit} className="full-form">
           <TextField
             id="outlined-input"
             className="outlined-input"
