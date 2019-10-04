@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Component} from 'react';
 import Nav from './nav';
 import '../css/App.css';
 import { Grid } from '@material-ui/core';
@@ -11,71 +11,151 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
 
+export default class Item extends Component{
 
-function Add() {
-      const catgs = {
-        consumables: {
-          isChecked: false,
-          description: 'consumables'
-        },
-        nonConsumables: {
-          isChecked: false,
-          description: 'non consumables'
-        },
-        artSupplies: {
-          isChecked: false,
-          description: 'art supplies'
-        },
-        food: {
-          isChecked: false,
-          description: 'food',
-        },
-        dinner: {
-          isChecked: false,
-          description: 'dining ware'
-        },
-        clothing: {
-          isChecked: false,
-          description: 'clothing'
-        },
-        decor: {
-          isChecked: false,
-          description: 'decor'
-        },
-        campfire: {
-          isChecked: false,
-          description: 'campfire equipment'
-        },
-        outdoorActivities: {
-          isChecked: false,
-          description: 'outdoor activities'
-        },
-        games: {
-          isChecked: false,
-          description: 'games'
-        },
-        themedEvents: {
-          isChecked: false,
-          description: 'themed events'
-        },
-        wrappingPaper: {
-          isChecked: false,
-          description: 'wrapping paper'
-        },
-        lights: {
-          isChecked: false,
-          description: 'lights'
-        },
-        glowStuff: {
-          isChecked: false,
-          description: 'glow in the dark'
-        },
-        seasonalDecor: {
-          isChecked: false,
-          description: 'seasonal decor'
-        },
-      };
+  constructor(props){ 
+    super(props);
+    this.onChangeName = this.onChangeName.bind(this);
+    this.onChangeCount = this.onChangeCount.bind(this);
+    this.onChangeCategory = this.onChangeCategory.bind(this);
+    this.onChangeAisle = this.onChangeAisle.bind(this);
+    this.onChangeShelf = this.onChangeShelf.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.state = {
+      name: '',
+      count: '',
+      category: {data:[]},
+      aisle: '',
+      shelf: '',
+      catgs : {data:["consumables","nonConsumables",
+      "artSuuplies","food","dinner","clothing","decor","campfire",
+      "outdoorActivities","games","themedEvents","wrappingPaper",
+      "lights","glowStuff","seasonalDecor"]}  
+    }
+  }
+  onChangeName(e){
+    this.setState({
+      name: e.target.value
+    });
+  }
+  onChangeCount(e){
+    this.setState({
+      count: e.target.value
+    });
+  }
+  onChangeCategory(e){
+    const category = this.state.category.data;
+    let index;
 
+    if(e.target.checked){
+      category.push(+e.target.value);
+    }
+    else{
+      index = category.indexOf(+e.target.value);
+      category.splice(index,1);
+    }
+    this.setState({
+      category: {category}
+    });
+  }
+  onChangeAisle(e){
+    this.setState({
+      aisle: e.target.value
+    });
+  }
+  onChangeShelf(e){
+    this.setState({
+      shelf: e.target.value
+    })
+  }
+  onSubmit(e){
+    e.preventDefault();
+
+      const item = {
+        name: this.state.name,
+        count: this.state.count,
+        category: this.state.category,
+        aisle: this.state.aisle,
+        shelf: this.state.shelf
+      }
+      console.log(item);
+      fetch('http://localhost:27017/api/add-item', {
+        method: 'POST',
+        body: JSON.stringify(item),
+        headers: {
+          'Content-Type': 'application/json'
+      }
+      }).then(res=>{
+        return res.json();
+      }).catch(err =>{
+          console.log("didnt generate report");
+        });
+      window.location = '/add';
+  }
+  catgs = {
+    consumables: {
+      isChecked: false,
+      description: 'consumables'
+    },
+    nonConsumables: {
+      isChecked: false,
+      description: 'non consumables'
+    },
+    artSupplies: {
+      isChecked: false,
+      description: 'art supplies'
+    },
+    food: {
+      isChecked: false,
+      description: 'food',
+    },
+    dinner: {
+      isChecked: false,
+      description: 'dining ware'
+    },
+    clothing: {
+      isChecked: false,
+      description: 'clothing'
+    },
+    decor: {
+      isChecked: false,
+      description: 'decor'
+    },
+    campfire: {
+      isChecked: false,
+      description: 'campfire equipment'
+    },
+    outdoorActivities: {
+      isChecked: false,
+      description: 'outdoor activities'
+    },
+    games: {
+      isChecked: false,
+      description: 'games'
+    },
+    themedEvents: {
+      isChecked: false,
+      description: 'themed events'
+    },
+    wrappingPaper: {
+      isChecked: false,
+      description: 'wrapping paper'
+    },
+    lights: {
+      isChecked: false,
+      description: 'lights'
+    },
+    glowStuff: {
+      isChecked: false,
+      description: 'glow in the dark'
+    },
+    seasonalDecor: {
+      isChecked: false,
+      description: 'seasonal decor'
+    },
+  };
+
+  render() {
   return (
     <div className="App">
       <Nav />
@@ -91,7 +171,8 @@ function Add() {
           id="outlined-input"
           className="outlined-input"
           label="Item Name / Description"
-          //value={values.name}
+          value = {this.state.name}
+          onChange = {this.onChangeName}
           margin="normal"
           variant="outlined"
         />
@@ -101,25 +182,26 @@ function Add() {
           id="outlined-input"
           className="outlined-input"
           label="Count"
-          //value={values.name}
+          value = {this.state.count}
+          onChange = {this.onChangeCount}
           margin="normal"
           variant="outlined"
         />
       <Grid item xs={12}>
       <p className="form-check">Categories</p>
-        {Object.keys(catgs).map((c) => (
+        {Object.keys(this.state.catgs.data).map((c) => (
           <div className="form-check">
              <FormControlLabel
           control={
             
             <Checkbox
-              checked={c.isChecked}
+              //checked={c.isChecked}
               className="check"
-              //onChange={handleChange('checkedB')}
-              value={c}
+              onChange={this.onChangeCategory}
+              value={this.state.catgs.data[c]}
             />
         }
-        label={catgs[c].description}
+        label={this.state.catgs.data[c]}
       />  
         </div>
         ))};
@@ -130,8 +212,8 @@ function Add() {
         <Grid item xs={12} className="loc">
         <InputLabel htmlFor="age-simple">Aisle</InputLabel>
         <Select
-          //value={values.age}
-          //onChange={handleChange}
+          value={this.state.aisle}
+          onClick={this.onChangeAisle}
         >
           <MenuItem value={'A'}>A</MenuItem>
           <MenuItem value={'B'}>B</MenuItem>
@@ -145,21 +227,21 @@ function Add() {
         <Grid item xs={12} className="loc">
         <InputLabel htmlFor="age-simple">Shelf</InputLabel>
         <Select
-          //value={values.age}
-          //onChange={handleChange}
+          value={this.state.shelf}
+          onClick={(e) => this.onChangeShelf(e)}
         >
-          <MenuItem value={1}>1</MenuItem>
-          <MenuItem value={2}>2</MenuItem>
-          <MenuItem value={3}>3</MenuItem>
-          <MenuItem value={4}>4</MenuItem>
-          <MenuItem value={5}>5</MenuItem>
+          <MenuItem value={'1'}>1</MenuItem>
+          <MenuItem value={'2'}>2</MenuItem>
+          <MenuItem value={'3'}>3</MenuItem>
+          <MenuItem value={'4'}>4</MenuItem>
+          <MenuItem value={'5'}>5</MenuItem>
         </Select>
         </Grid>
         </Grid>
         </Grid>
         <div className="break">
         </div>
-        <Button id="pink-button" variant="contained">
+        <Button id="pink-button" variant="contained" onClick={this.onSubmit}>
           SUBMIT
         </Button>
         </form>
@@ -168,6 +250,6 @@ function Add() {
       </header>
     </div>
   );
-}
 
-export default Add;
+      }
+    }
