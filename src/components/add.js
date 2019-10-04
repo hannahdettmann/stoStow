@@ -23,12 +23,15 @@ export default class Item extends Component{
     this.state = {
       name: '',
       count: '',
-      category: [],
+      category: {data:[]},
       aisle: '',
       shelf: '',
+      catgs : {data:["consumables","nonConsumables",
+      "artSuuplies","food","dinner","clothing","decor","campfire",
+      "outdoorActivities","games","themedEvents","wrappingPaper",
+      "lights","glowStuff","seasonalDecor"]}  
     }
   }
-
   onChangeName(e){
     this.setState({
       name: e.target.value
@@ -40,7 +43,7 @@ export default class Item extends Component{
     });
   }
   onChangeCategory(e){
-    const category = this.state.category;
+    const category = this.state.category.data;
     let index;
 
     if(e.target.checked){
@@ -51,7 +54,7 @@ export default class Item extends Component{
       category.splice(index,1);
     }
     this.setState({
-      category: category
+      category: {category}
     });
   }
   onChangeAisle(e){
@@ -72,8 +75,7 @@ export default class Item extends Component{
         count: this.state.count,
         category: this.state.category,
         aisle: this.state.aisle,
-        shelf: this.state.shelf,
-        isChecked: this.state.isChecked
+        shelf: this.state.shelf
       }
       console.log(item);
       fetch('http://localhost:27017/api/add-item', {
@@ -186,19 +188,19 @@ export default class Item extends Component{
         />
       <Grid item xs={12}>
       <p className="form-check">Categories</p>
-        {Object.keys(this.catgs).map((c) => (
+        {Object.keys(this.state.catgs.data).map((c) => (
           <div className="form-check">
              <FormControlLabel
           control={
             
             <Checkbox
-              checked={c.isChecked}
+              //checked={c.isChecked}
               className="check"
               onChange={this.onChangeCategory}
-              value={this.state.category}
+              value={this.state.catgs.data[c]}
             />
         }
-        label={this.catgs[c].description}
+        label={this.state.catgs.data[c]}
       />  
         </div>
         ))};

@@ -22,9 +22,8 @@ exports.postItem = (req,res,next) => {
     const category = req.body.category;
     const aisle = req.body.aisle;
     const shelf = req.body.shelf;
-    const isChecked = req.body.isChecked;
 
-    const item = new Item(name,count,category,aisle,shelf,isChecked);
+    const item = new Item(name,count,category,aisle,shelf);
     return item.save()
     .then(result => {
         console.log(result);
