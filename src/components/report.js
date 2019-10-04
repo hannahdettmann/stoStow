@@ -11,13 +11,13 @@ export default class Report extends Component{
 
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
-    this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onChangeMessage = this.onChangeMessage.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       name: '',
       email: '',
-      description: ''
+      message: ''
     }
   }
 
@@ -34,9 +34,9 @@ export default class Report extends Component{
         email: e.target.value
       });
     }
-    onChangeDescription(e){
+    onChangeMessage(e){
       this.setState({
-        description: e.target.value
+        message: e.target.value
       });
     }
     onSubmit(e){
@@ -45,7 +45,7 @@ export default class Report extends Component{
       const report = {
         name: this.state.name,
         email: this.state.email,
-        description: this.state.description
+        message: this.state.message
       }
       console.log(report);
       fetch('http://localhost:27017/api/add-report', {
@@ -96,8 +96,8 @@ export default class Report extends Component{
             rows="8"
             className="outlined-input"
             label="Message"
-            value = {this.state.description}
-            onChange={this.onChangeDescription}
+            value = {this.state.message}
+            onChange={this.onChangeMessage}
             //value={values.name}
             margin="normal"
             variant="outlined"
