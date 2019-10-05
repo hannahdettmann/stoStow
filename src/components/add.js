@@ -24,7 +24,7 @@ export default class Item extends Component{
     this.state = {
       name: '',
       count: '',
-      category: {data:[]},
+      category:[],
       aisle: '',
       shelf: '',
       catgs : {data:["consumables","nonConsumables",
@@ -44,19 +44,17 @@ export default class Item extends Component{
     });
   }
   onChangeCategory(e){
-    const category = this.state.category.data;
-    let index;
-
+    console.log(e.target.value)
     if(e.target.checked){
-      category.push(+e.target.value);
+      //category.push(+e.target.value);
+      var joined = this.state.category.concat(e.target.value)
+      this.setState({category:joined});
     }
     else{
-      index = category.indexOf(+e.target.value);
-      category.splice(index,1);
+      this.setState({category: this.state.category.filter(category =>{
+        return category !== e.target.value
+      })});
     }
-    this.setState({
-      category: {category}
-    });
   }
   onChangeAisle(e){
     this.setState({
