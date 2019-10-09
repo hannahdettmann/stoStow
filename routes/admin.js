@@ -10,4 +10,6 @@ router.post('/add-report', adminController.postSendReport);
 
 router.post('/add-item', adminController.postItem);
 
+router.get('/get-item', adminController.getItem);
+
 module.exports = router;

@@ -34,5 +34,40 @@ exports.postItem = (req,res,next) => {
         throw err;
     });
 };
+exports.getItem = (req,res,next) => {
+    if(req.params.name){
+        Item.fetchByName(req.params.name)
+        .then(()=>{
+            console.log("fetched product");
+            res.redirect('/api/get-item');
+        })
+        .catch(err => console.log(err));
+    }
+    else if(req.params.category){
+        Item.fetchByCategory(req.params.category)
+        .then(()=>{
+            console.log("fetched product");
+            res.redirect('/api/get-item');
+        })
+        .catch(err => console.log(err));
+    }
+    else if(req.params.aisle){
+        Item.fetchByAisle(req.params.aisle)
+        .then(()=>{
+            console.log("fetched product");
+            res.redirect('/api/get-item');
+        })
+        .catch(err => console.log(err));
+    }
+    else{
+        Item.fetchByShelf(req.params.shelf)
+        .then(()=>{
+            console.log("fetched product");
+            res.redirect('/api/get-item');
+        })
+        .catch(err => console.log(err));
+    }
+};
+
 
 

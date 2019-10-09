@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Component} from 'react';
 import '../css/App.css';
 import Nav from './nav';
 import TextField from '@material-ui/core/TextField';
@@ -29,31 +29,63 @@ const theme = createMuiTheme({
     }
   }
 })
+export default class Search extends Component{
+  constructor(props){
+    super(props);
+    var token = null;
+    this.onChange = this.onChange.bind(this);
+    this.Search = this.Search.bind(this);
+    this.state = {
+      query:'',
+      item: []
+      }
+    } 
+    onChange(e){
+      this.setState({
+        query: e.target.value
+      });
+    }
+    Search(e){
+      e.preventDefault();
+      const url = 'http://localhost:27017/api/get-item';
+      const token = {};
+      this.token = token;
 
-function Search() {
-  const classes = useStyles();
-  return (
-    <div className="App">
-      <Nav />
-      <header className="App-header">
-        <ThemeProvider theme={theme}>
-          <TextField
-            id="standard-input"
-            placeholder="Search..."
-            type="standard"
-            InputProps={{
-              className: classes.input,
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon className="search-icon"/>
-                </InputAdornment>
-              )
-            }}
-          />
-        </ThemeProvider>        
-      </header>
-    </div>
-  );
+      fetch(url)
+        .then(results => results.json())
+        .then(data =>{
+          if(this.token == token){
+            this.setState({item: data.results});
+          }
+        });     
+    }
+
+
+  }
+  render() {
+    const classes = useStyles();
+    return (
+      <div className="App">
+        <Nav />
+        <header className="App-header">
+          <ThemeProvider theme={theme}>
+            <TextField
+              id="standard-input"
+              placeholder="Search..."
+              type="standard"
+              InputProps={{
+                className: classes.input,
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon className="search-icon"/>
+                  </InputAdornment>
+                )
+              }}
+            />
+          </ThemeProvider>        
+        </header>
+      </div>
+    );
+  }
 }
 
-export default Search;
