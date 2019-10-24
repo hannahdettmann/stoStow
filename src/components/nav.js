@@ -14,6 +14,7 @@ import Grid from '@material-ui/core/Grid';
 const Nav = () => {
     return (
         <div>
+            <header>
             <AppBar position="fixed" color="inherit">
                 <Toolbar className="nav">
                     <Grid container spacing={2}>
@@ -41,6 +42,7 @@ const Nav = () => {
                     </Grid>
                 </Toolbar>
             </AppBar>
+            </header>
         </div>
     )
 }
