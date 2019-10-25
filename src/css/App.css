@@ -17,15 +17,20 @@
   color: #DD7E6A
 }
 
+.form-text{
+  color:#282c34;
+}
+
 #pink-button{
   background-color: #DD7E6A;
   width: 300px;
-
+  height: 35px;
 }
 
 .form-check{
   color: #282c34;
-  padding-left: 5px;
+  padding: 20px;
+  float:left;
 }
 
 .check{
@@ -36,6 +41,13 @@
   background-color: whitesmoke;
   padding: 25px;
   border-radius: 5%
+}
+
+.full-form-add{
+  background-color: whitesmoke;
+  padding: 25px;
+  border-radius: 5%;
+  width: 65%;
 }
 
 #break{

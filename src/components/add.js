@@ -3,10 +3,7 @@ import Nav from './nav';
 import '../css/App.css';
 import { Grid } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
@@ -157,36 +154,46 @@ export default class Item extends Component{
   return (
     <div className="App">
       <Nav />
-      <header className="App-header">
-      <p>add an item to storage</p>
+      <body className="App-header">
+        <br />
+        <br />
+        <br />
+      <h3>add an item to storage</h3>
       <Grid container xs={12}
             justify="center"
             alignItems="left">
-      <div className="full-form">
+      <div className="full-form-add">
         <form >
-          <Grid item xs={10}>
-        <TextField
-          id="outlined-input"
-          className="outlined-input"
-          label="Item Name / Description"
-          value = {this.state.name}
-          onChange = {this.onChangeName}
-          margin="normal"
-          variant="outlined"
-        />
+          <Grid item xs={12}>
+          <Grid item xs={12}>
+          <Grid item xs={12}>
+            <TextField
+              id="outlined-input"
+              className="outlined-input"
+              label="Item Name / Description"
+              value = {this.state.name}
+              onChange = {this.onChangeName}
+              margin="normal"
+              variant="outlined"
+            />
         </Grid>
-        <Grid item xs={10}>
-        <TextField
-          id="outlined-input"
-          className="outlined-input"
-          label="Count"
-          value = {this.state.count}
-          onChange = {this.onChangeCount}
-          margin="normal"
-          variant="outlined"
-        />
+          <Grid item xs={12}>
+            <TextField
+              id="outlined-input"
+              className="outlined-input"
+              label="Count"
+              value = {this.state.count}
+              onChange = {this.onChangeCount}
+              margin="normal"
+              variant="outlined"
+            />
+          </Grid>
+        </Grid>
       <Grid item xs={12}>
-      <p className="form-check">Categories</p>
+      <p className="form-text">Categories: </p>
+      <br />
+      </Grid>
+      <Grid item xs={12}>
         {Object.keys(this.state.catgs.data).map((c) => (
           <div className="form-check">
              <FormControlLabel
@@ -205,47 +212,26 @@ export default class Item extends Component{
         ))};
         </Grid>
         <Grid item xs={12} >
-
-        <p className='form-check'>Location: </p>
-        <Grid item xs={12} className="loc">
-        <InputLabel htmlFor="age-simple">Aisle</InputLabel>
-        <Select
-          value={this.state.aisle}
-          onClick={this.onChangeAisle}
-        >
-          <MenuItem value={'A'}>A</MenuItem>
-          <MenuItem value={'B'}>B</MenuItem>
-          <MenuItem value={'C'}>C</MenuItem>
-          <MenuItem value={'D'}>D</MenuItem>
-          <MenuItem value={'E'}>E</MenuItem>
-          <MenuItem value={'F'}>F</MenuItem>
-          <MenuItem value={'G'}>G</MenuItem>
-        </Select>
+          <TextField
+            id="outlined-input"
+            className="outlined-input"
+            label="location"
+            value = {this.state.location}
+            onChange = {this.onChangeLocation}
+            margin="normal"
+            variant="outlined"
+          />
         </Grid>
-        <Grid item xs={12} className="loc">
-        <InputLabel htmlFor="age-simple">Shelf</InputLabel>
-        <Select
-          value={this.state.shelf}
-          onClick={(e) => this.onChangeShelf(e)}
-        >
-          <MenuItem value={'1'}>1</MenuItem>
-          <MenuItem value={'2'}>2</MenuItem>
-          <MenuItem value={'3'}>3</MenuItem>
-          <MenuItem value={'4'}>4</MenuItem>
-          <MenuItem value={'5'}>5</MenuItem>
-        </Select>
-        </Grid>
-        </Grid>
-        </Grid>
-        <div className="break">
-        </div>
+       
         <Button id="pink-button" variant="contained" onClick={this.onSubmit}>
           SUBMIT
         </Button>
+        <br />
+        </Grid>
         </form>
       </div>
         </Grid>
-      </header>
+      </body>
     </div>
   );
 

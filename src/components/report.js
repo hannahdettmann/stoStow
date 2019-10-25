@@ -66,7 +66,7 @@ export default class Report extends Component{
       return (
         <div className="App">
           <Nav />
-          <header className="App-header">
+          <body className="App-header">
           <p className="header-close">report an issue or request a feature</p>
     
           <form action="/api/add-report" method="POST" onSubmit={this.onSubmit} className="full-form">
@@ -108,7 +108,7 @@ export default class Report extends Component{
           </div>      
           </form>
     
-          </header>
+          </body>
         </div>
       );
     } 
