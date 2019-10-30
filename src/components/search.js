@@ -7,13 +7,10 @@ import { InputAdornment } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
 import { makeStyles, createMuiTheme } from '@material-ui/core/styles';
 
-
-
-
 export default class Search extends Component{
   constructor(props){
     super(props);
-    token = null;
+    this.token = null;
     this.onChange = this.onChange.bind(this);
     this.Search = this.Search.bind(this);
     this.state = {
@@ -21,7 +18,35 @@ export default class Search extends Component{
       item: []
       }
     }
-    useStyles = makeStyles({
+    
+
+    onChange(e){
+      this.setState({
+        query: e.target.value
+      });
+    }
+    Search(e){
+      if(e.key === 'enter'){
+        e.preventDefault();
+        const url = 'http://localhost:27017/api/get-item';
+        const token = {};
+        this.token = token;
+
+        fetch(url)
+          .then(results => results.json())
+          .then(data =>{
+            if(this.token == token){
+              this.setState({item: data.results});
+            }
+          });
+          //remove after prod
+          console.log(this.state.item);    
+      }
+    }
+
+  
+  render() {
+    const useStyles = makeStyles({
       root: {
         borderRadius: 3,
         border: 0,
@@ -33,7 +58,7 @@ export default class Search extends Component{
       }
     });
     
-    theme = createMuiTheme({
+    const theme = createMuiTheme({
       palette: {
         primary: {
           main: '#DD7E6A',
@@ -43,43 +68,19 @@ export default class Search extends Component{
         }
       }
     });
-
-    onChange(e){
-      this.setState({
-        query: e.target.value
-      });
-    }
-    Search(e){
-      e.preventDefault();
-      const url = 'http://localhost:27017/api/get-item';
-      const token = {};
-      this.token = token;
-
-      fetch(url)
-        .then(results => results.json())
-        .then(data =>{
-          if(this.token == token){
-            this.setState({item: data.results});
-          }
-        });
-        //remove after prod
-        console.log(this.state.item);    
-    }
-
-
-  
-  render() {
     return (
       <div className="App">
         <Nav />
         <header className="App-header">
-          <ThemeProvider theme={this.theme}>
+          <ThemeProvider theme={theme}>
             <TextField
               id="standard-input"
+              onChange = {this.onChange}
+              onKeyDown = {this.Search}
               placeholder="Search..."
               type="standard"
               InputProps={{
-                className: this.useStyles().input,
+                className: useStyles.input,
                 startAdornment: (
                   <InputAdornment position="start">
                     <SearchIcon className="search-icon"/>

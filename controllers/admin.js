@@ -20,10 +20,9 @@ exports.postItem = (req,res,next) => {
     const name = req.body.name;
     const count = req.body.count
     const category = req.body.category;
-    const aisle = req.body.aisle;
-    const shelf = req.body.shelf;
+    const location = req.body.location;
 
-    const item = new Item(name,count,category,aisle,shelf);
+    const item = new Item(name,count,category,location);
     return item.save()
     .then(result => {
         console.log(result);
@@ -35,38 +34,13 @@ exports.postItem = (req,res,next) => {
     });
 };
 exports.getItem = (req,res,next) => {
-    if(req.params.name){
-        Item.fetchByName(req.params.name)
-        .then(()=>{
-            console.log("fetched product");
-            res.redirect('/api/get-item');
-        })
-        .catch(err => console.log(err));
-    }
-    else if(req.params.category){
-        Item.fetchByCategory(req.params.category)
-        .then(()=>{
-            console.log("fetched product");
-            res.redirect('/api/get-item');
-        })
-        .catch(err => console.log(err));
-    }
-    else if(req.params.aisle){
-        Item.fetchByAisle(req.params.aisle)
-        .then(()=>{
-            console.log("fetched product");
-            res.redirect('/api/get-item');
-        })
-        .catch(err => console.log(err));
-    }
-    else{
-        Item.fetchByShelf(req.params.shelf)
-        .then(()=>{
-            console.log("fetched product");
-            res.redirect('/api/get-item');
-        })
-        .catch(err => console.log(err));
-    }
+    cursorArr = fetchDocuments();
+    var fs = require('fs');
+    var json = JSON.stringify(cursorArr);
+    fs.writeFile('items.json',json,'utf-8', err =>{
+        if (err) throw err;
+        console.log('created file');
+    });
 };
 
 
