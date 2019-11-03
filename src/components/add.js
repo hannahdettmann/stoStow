@@ -15,20 +15,23 @@ export default class Item extends Component{
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeCount = this.onChangeCount.bind(this);
     this.onChangeCategory = this.onChangeCategory.bind(this);
-    this.onChangeAisle = this.onChangeAisle.bind(this);
-    this.onChangeShelf = this.onChangeShelf.bind(this);
+    this.onChangeLocation = this.onChangeLocation.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.state = {
       name: '',
       count: '',
-      category: {data:[]},
-      aisle: '',
-      shelf: '',
+      category:[],
+      location:'',
       catgs : {data:["consumables","nonConsumables",
       "artSuuplies","food","dinner","clothing","decor","campfire",
       "outdoorActivities","games","themedEvents","wrappingPaper",
       "lights","glowStuff","seasonalDecor"]}  
     }
+  }
+  onChangeLocation(e){
+    this.setState({
+      location: e.target.value
+    })
   }
   onChangeName(e){
     this.setState({
@@ -41,29 +44,17 @@ export default class Item extends Component{
     });
   }
   onChangeCategory(e){
-    const category = this.state.category.data;
-    let index;
-
+    console.log(e.target.value)
     if(e.target.checked){
-      category.push(+e.target.value);
+      //category.push(+e.target.value);
+      var joined = this.state.category.concat(e.target.value)
+      this.setState({category:joined});
     }
     else{
-      index = category.indexOf(+e.target.value);
-      category.splice(index,1);
+      this.setState({category: this.state.category.filter(category =>{
+        return category !== e.target.value
+      })});
     }
-    this.setState({
-      category: {category}
-    });
-  }
-  onChangeAisle(e){
-    this.setState({
-      aisle: e.target.value
-    });
-  }
-  onChangeShelf(e){
-    this.setState({
-      shelf: e.target.value
-    })
   }
   onSubmit(e){
     e.preventDefault();
@@ -72,8 +63,7 @@ export default class Item extends Component{
         name: this.state.name,
         count: this.state.count,
         category: this.state.category,
-        aisle: this.state.aisle,
-        shelf: this.state.shelf
+        location: this.state.location
       }
       console.log(item);
       fetch('http://localhost:27017/api/add-item', {

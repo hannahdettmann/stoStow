@@ -4,14 +4,11 @@ const MongoClient = mongodb.MongoClient;
 let _db;
 const uri =   "mongodb://localhost:27017/launch";
 const mongoConnect = (callback) => {
-MongoClient.connect(
-  uri,
-  { useUnifiedTopology: true },
-  { useNewUrlParser: true }
-  )
+MongoClient.connect(uri)
   .then(client => {
     console.log('Connected!');
-    _db = client.db();
+    _db = client.db('launch');
+
     callback(client);
   })
   .catch(err => {
@@ -19,7 +16,6 @@ MongoClient.connect(
     throw err;
   });
 };
-
 const getDb = () => {
   if(_db){
     return _db;
