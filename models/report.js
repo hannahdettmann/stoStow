@@ -9,7 +9,7 @@ class Report{
     }
     save(){
         const db = getDb();
-        db.collection('reports').insertOne(this);
+        return db.collection('reports').insertOne(this);
     }
 }
 

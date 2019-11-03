@@ -11,12 +11,26 @@ class Item{
     }
     save(){
         const db = getDb();
-        db.collection('items').insertOne(this);
+        return db.collection('items').insertOne(this);
     }
 
     static fetchDocuments(){
-        const cursor = db.collection('items').find({});
-        return cursor
+        const db = getDb()
+        return db.collection('items').find({})
+        .toArray()
+        .then(items => {
+            console.log(items);
+            var fs = require('fs');
+            var json = JSON.stringify(items);
+            console.log(json);
+            fs.writeFile('items.json',json,'utf-8', err =>{
+            if (err) throw err;
+            console.log('created file');
+    });
+          })
+          .catch(err =>{
+            console.log(err)
+          });
     }
 }
 
