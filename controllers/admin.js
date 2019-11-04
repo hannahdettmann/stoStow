@@ -1,5 +1,7 @@
 const Report = require('../models/report');
 const Item = require('../models/item');
+const fs = require('fs');
+const getDb = require('../utils/database').getDb;
 exports.postSendReport = (req,res, next) =>{
     const name = req.body.name;
     const email = req.body.email;
@@ -34,13 +36,14 @@ exports.postItem = (req,res,next) => {
     });
 };
 exports.getItem = (req,res,next) => {
-    cursorArr = fetchDocuments();
-    var fs = require('fs');
-    var json = JSON.stringify(cursorArr);
+    cursor = Item.fetchDocuments()
+    
+    var json = JSON.stringify(cursor);
     fs.writeFile('items.json',json,'utf-8', err =>{
         if (err) throw err;
         console.log('created file');
     });
+
 };
 
 

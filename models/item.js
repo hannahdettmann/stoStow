@@ -13,11 +13,19 @@ class Item{
         const db = getDb();
         db.collection('items').insertOne(this);
     }
-
     static fetchDocuments(){
-        const cursor = db.collection('items').find({});
-        return cursor
+        const db = getDb();
+        return db.collection('items').find({})
+            .then(result =>{
+                console.log(result);
+            })
+            .catch(err => {
+                console.log(err);
+                throw err;
+            });
     }
+
+
 }
 
 module.exports = Item;

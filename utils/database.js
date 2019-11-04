@@ -11,7 +11,7 @@ MongoClient.connect(
   )
   .then(client => {
     console.log('Connected!');
-    _db = client.db();
+    _db = client.db('launch');
     callback(client);
   })
   .catch(err => {
