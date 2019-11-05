@@ -34,14 +34,17 @@ exports.postItem = (req,res,next) => {
     });
 };
 exports.getItem = (req,res,next) => {
-    var cursorArr = Item.fetchDocuments();
-    var fs = require('fs');
-    var json = JSON.stringify(cursorArr);
-    console.log(json);
-    fs.writeFile('items.json',json,'utf-8', err =>{
-        if (err) throw err;
-        console.log('created file');
+    Item.fetchDocuments()
+    .then(json => {
+        if (json.includes('\"')){
+            json = JSON.parse(json)
+        }
+        res.json(json);
+    })
+    .catch(err => {
+        throw err;
     });
+    
 };
 
 
