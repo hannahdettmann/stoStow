@@ -11,18 +11,20 @@ class Item{
     }
     save(){
         const db = getDb();
-        db.collection('items').insertOne(this);
+        return db.collection('items').insertOne(this);
     }
     static fetchDocuments(){
-        const db = getDb();
+        const db = getDb()
         return db.collection('items').find({})
-            .then(result =>{
-                console.log(result);
-            })
-            .catch(err => {
-                console.log(err);
-                throw err;
-            });
+        .toArray()
+        .then(items => {
+            var json = JSON.stringify(items);
+            console.log(json);
+            return json
+        })
+          .catch(err =>{
+            console.log(err)
+          });
     }
 
 
