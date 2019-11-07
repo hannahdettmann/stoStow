@@ -11,7 +11,13 @@ class Item{
     }
     save(){
         const db = getDb();
-        return db.collection('items').insertOne(this);
+        return db.collection('items').insertOne(this)
+        .then(item => {
+            return item;
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
 
     static fetchDocuments(){
@@ -21,7 +27,7 @@ class Item{
         .then(items => {
             var json = JSON.stringify(items);
             console.log(json);
-            return json
+            return json;
         })
           .catch(err =>{
             console.log(err)

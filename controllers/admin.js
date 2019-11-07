@@ -7,12 +7,9 @@ exports.postSendReport = (req,res, next) =>{
 
     const report = new Report(name,email,message);
     return report.save()
-    .then(result => {
-        console.log(result);
-        res.redirect('/report');
-    })
-    .catch(err => {
-        console.log(err);
+    .then(message =>{
+        res.json(message)
+    }).catch(err => {
         throw err;
     });
 };
@@ -24,12 +21,9 @@ exports.postItem = (req,res,next) => {
 
     const item = new Item(name,count,category,location);
     return item.save()
-    .then(result => {
-        console.log(result);
-        res.redirect('/add');
-    })
-    .catch(err => {
-        console.log(err);
+    .then(obj =>{
+        res.json(obj)
+    }).catch(err => {
         throw err;
     });
 };
