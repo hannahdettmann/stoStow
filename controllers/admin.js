@@ -7,12 +7,9 @@ exports.postSendReport = (req,res, next) =>{
 
     const report = new Report(name,email,message);
     return report.save()
-    .then(result => {
-        console.log(result);
-        res.redirect('/report');
-    })
-    .catch(err => {
-        console.log(err);
+    .then(message =>{
+        res.json(message)
+    }).catch(err => {
         throw err;
     });
 };
@@ -24,24 +21,24 @@ exports.postItem = (req,res,next) => {
 
     const item = new Item(name,count,category,location);
     return item.save()
-    .then(result => {
-        console.log(result);
-        res.redirect('/add');
-    })
-    .catch(err => {
-        console.log(err);
+    .then(obj =>{
+        res.json(obj)
+    }).catch(err => {
         throw err;
     });
 };
 exports.getItem = (req,res,next) => {
-    var cursorArr = Item.fetchDocuments();
-    var fs = require('fs');
-    var json = JSON.stringify(cursorArr);
-    console.log(json);
-    fs.writeFile('items.json',json,'utf-8', err =>{
-        if (err) throw err;
-        console.log('created file');
+    Item.fetchDocuments()
+    .then(json => {
+        if (json.includes('\"')){
+            json = JSON.parse(json)
+        }
+        res.json(json);
+    })
+    .catch(err => {
+        throw err;
     });
+    
 };
 
 

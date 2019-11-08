@@ -9,7 +9,13 @@ class Report{
     }
     save(){
         const db = getDb();
-        return db.collection('reports').insertOne(this);
+        return db.collection('reports').insertOne(this)
+        .then(message =>{
+            return message;
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
 }
 

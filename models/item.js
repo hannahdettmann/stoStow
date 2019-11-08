@@ -11,7 +11,13 @@ class Item{
     }
     save(){
         const db = getDb();
-        return db.collection('items').insertOne(this);
+        return db.collection('items').insertOne(this)
+        .then(item => {
+            return item;
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
 
     static fetchDocuments(){
@@ -19,15 +25,10 @@ class Item{
         return db.collection('items').find({})
         .toArray()
         .then(items => {
-            console.log(items);
-            var fs = require('fs');
             var json = JSON.stringify(items);
             console.log(json);
-            fs.writeFile('items.json',json,'utf-8', err =>{
-            if (err) throw err;
-            console.log('created file');
-    });
-          })
+            return json;
+        })
           .catch(err =>{
             console.log(err)
           });
