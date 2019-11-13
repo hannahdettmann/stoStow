@@ -39,7 +39,8 @@ exports.getItem = (req,res,next) => {
     Item.fetchDocuments()
     .then(json => {
         if (json.includes('\"')){
-            json = JSON.parse(json)
+            json = JSON.parse(json);
+            return json;
         }
         res.json(json);
     })
