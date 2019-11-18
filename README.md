@@ -1,15 +1,43 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Before using this project, you must have NPM to run node.js apps and react apps
+## Installation
+    -----MacOS-----
+    Have homebrew installed from
+     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+     then call brew install node for installation
+     To learn more go to (http://brew.sh)
+    -----Windows-----
+    Either download the msi file from (https://nodejs.org/en/)
+    Or download chocolately from their official website  (https://chocolatey.org/), call cinst nodejs.install
+    -----Linux-----
+    Install nvm, node version manager, instructions found at (https://github.com/nvm-sh/nvm#install-script)
+    Then use nvm install node to get latest version
+    -----------------------------------
+    Prequisites<br>
+    Once you have node/npm/nvm
+    Run 'npm install' in the same location as the package.json to recieve all the packages used
+
+    Databases<br>
+    Our app uses MongoDB atlas cluster or a local db set on a local machine
+    For testing purposes it is recommended to use your own local db, specifically MongoDB
+    For installation go too (https://www.mongodb.com/download-center/community) to run your own database locally
+    More instructions on accessing the database is found at (https://github.com/mongodb/mongo/)
+    
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm start` is concurrently running react-scripts build and node app.js
 
 Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser. 
+As well as run the backend site at [http://localhost:27017](http://localhost:27017)
+To only run the frontend, use react-scripts start
+For backend only, use node app.js
 
 The page will reload if you make edits.<br>
+However if edits are made to the backend site, you must reload to see edits.<br>
 You will also see any lint errors in the console.
 
 ### `npm test`
