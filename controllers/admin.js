@@ -49,6 +49,10 @@ exports.getItem = (req,res,next) => {
     });
     
 };
+exports.checkoutItem = (req,res,next) => {
+    const count = req.body.count;
+    const checkoutItem = req.body.id;
+};
 
 
 
