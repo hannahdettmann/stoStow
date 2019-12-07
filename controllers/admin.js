@@ -1,5 +1,7 @@
 const Report = require('../models/report');
 const Item = require('../models/item');
+const fs = require('fs');
+const getDb = require('../utils/database').getDb;
 exports.postSendReport = (req,res, next) =>{
     const name = req.body.name;
     const email = req.body.email;
@@ -31,7 +33,8 @@ exports.getItem = (req,res,next) => {
     Item.fetchDocuments()
     .then(json => {
         if (json.includes('\"')){
-            json = JSON.parse(json)
+            json = JSON.parse(json);
+            return json;
         }
         res.json(json);
     })
@@ -39,6 +42,10 @@ exports.getItem = (req,res,next) => {
         throw err;
     });
     
+};
+exports.checkoutItem = (req,res,next) => {
+    const count = req.body.count;
+    const checkoutItem = req.body.id;
 };
 
 

@@ -12,4 +12,6 @@ router.post('/add-item', adminController.postItem);
 
 router.get('/get-item', adminController.getItem);
 
+router.put('/checkout-item',adminController.checkoutItem);
+
 module.exports = router;

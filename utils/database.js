@@ -8,7 +8,6 @@ MongoClient.connect(uri)
   .then(client => {
     console.log('Connected!');
     _db = client.db('launch');
-
     callback(client);
   })
   .catch(err => {

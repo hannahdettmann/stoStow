@@ -19,7 +19,6 @@ class Item{
             console.log(err);
         });
     }
-
     static fetchDocuments(){
         const db = getDb()
         return db.collection('items').find({})
@@ -33,6 +32,8 @@ class Item{
             console.log(err)
           });
     }
+
+
 }
 
 module.exports = Item;
