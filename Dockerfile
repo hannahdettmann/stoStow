@@ -1,7 +1,12 @@
-FROM node:12
-WORKDIR /usr/src/app
-COPY package*.json ./
+FROM node:8 as react-build
+WORKDIR /app
+COPY . ./
+RUN yarn
+RUN yarn build
+
+FROM node:8
+WORKDIR /user/src/app
+COPY package.json .
 RUN npm install
 COPY . .
-EXPOSE 27017
 CMD ["node", "app.js"]
